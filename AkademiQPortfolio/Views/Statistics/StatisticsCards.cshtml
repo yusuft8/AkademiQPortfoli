@@ -1,0 +1,164 @@
+﻿@{
+    ViewData["Title"] = "StatisticsCards";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="w-full px-6 lg:px-10 py-6 space-y-6">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-4xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-3">
+                <span class="w-2 h-9 bg-primary rounded-full"></span>
+                Genel Bakış & İstatistikler
+            </h2>
+            <p class="text-slate-500 dark:text-slate-400 mt-1">
+                Admin panelinin genel durumunu buradan takip edebilirsin.
+            </p>
+        </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Mesaj Kartı -->
+        <div class="glass-panel rounded-2xl p-6 border border-white/10 hover:border-white/15 transition">
+            <div class="flex items-center gap-4">
+                <div class="p-4 bg-primary rounded-xl text-white shadow-lg shadow-primary/30">
+                    <span class="material-symbols-outlined text-[28px]">mail</span>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Toplam Mesaj</p>
+                    <h3 class="text-3xl font-black text-slate-900 dark:text-white">@ViewBag.messageCount</h3>
+                </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-2 gap-3">
+                <div class="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-3">
+                    <p class="text-xs font-bold text-emerald-300">Okundu</p>
+                    <p class="text-lg font-black text-emerald-200">@ViewBag.messageCountByIsReadTrue</p>
+                </div>
+
+                <div class="rounded-xl bg-red-500/10 border border-red-500/20 p-3">
+                    <p class="text-xs font-bold text-red-300">Okunmadı</p>
+                    <p class="text-lg font-black text-red-200">@ViewBag.messageCountByIsReadFalse</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skill Kartı -->
+        <div class="glass-panel rounded-2xl p-6 border border-white/10 hover:border-white/15 transition">
+            <div class="flex items-center gap-4">
+                <div class="p-4 bg-amber-500 rounded-xl text-white shadow-lg shadow-amber-500/30">
+                    <span class="material-symbols-outlined text-[28px]">bolt</span>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Toplam Yetenek</p>
+                    <h3 class="text-3xl font-black text-slate-900 dark:text-white">@ViewBag.skillCount</h3>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 italic">Genel Yetkinlik Ortalaması</span>
+                    <span class="text-xs font-black text-amber-300">
+                        %@Convert.ToDecimal(ViewBag.skillAvgValue).ToString("0")
+                    </span>
+                </div>
+
+                <div class="w-full bg-white/10 rounded-full h-3 overflow-hidden">
+                    <div class="bg-amber-500 h-3 rounded-full transition-all duration-1000"
+                         style="width: @ViewBag.skillAvgValue%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Proje Kartı -->
+        <div class="rounded-2xl p-6 bg-gradient-to-br from-indigo-500 to-blue-600 shadow-lg shadow-indigo-500/30 hover:scale-[1.01] transition">
+            <div class="flex flex-col h-full justify-between">
+                <div class="flex items-center justify-between">
+                    <div class="p-3 bg-white/20 rounded-xl text-white">
+                        <span class="material-symbols-outlined text-[28px]">folder_open</span>
+                    </div>
+                    <span class="text-white/90 text-xs font-bold border border-white/30 px-3 py-1 rounded-full">
+                        Portfolyo
+                    </span>
+                </div>
+
+                <div class="mt-10 text-white">
+                    <h3 class="text-4xl font-black">@ViewBag.ProjectCount</h3>
+                    <p class="text-indigo-100 text-sm">Toplam Proje</p>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-white/20 text-white/90 text-xs italic">
+                    Deneyim: @ViewBag.ExperienceCount • Eğitim: @ViewBag.EducationCount
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Mesaj Kategorileri -->
+    <div class="pt-4 space-y-4">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-1.5 h-6 bg-white/30 rounded-full"></span>
+            Mesaj Kategorileri
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+            <div class="group glass-panel rounded-3xl p-5 border border-white/10 hover:bg-primary/15 transition">
+                <div class="flex items-center justify-between">
+                    <div class="p-3 bg-primary/15 rounded-2xl">
+                        <span class="material-symbols-outlined text-primary">work</span>
+                    </div>
+                    <span class="text-2xl font-black text-slate-900 dark:text-white">
+                        @ViewBag.messageSubjectByWorkOffer
+                    </span>
+                </div>
+                <div class="mt-4">
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white">Proje Teklifleri</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-tight">
+                        İş birliği talepleri
+                    </p>
+                </div>
+            </div>
+
+            <div class="group glass-panel rounded-3xl p-5 border border-white/10 hover:bg-emerald-500/15 transition">
+                <div class="flex items-center justify-between">
+                    <div class="p-3 bg-emerald-500/15 rounded-2xl">
+                        <span class="material-symbols-outlined text-emerald-300">code</span>
+                    </div>
+                    <span class="text-2xl font-black text-slate-900 dark:text-white">
+                        @ViewBag.messageSubjectByApiDevelopment
+                    </span>
+                </div>
+                <div class="mt-4">
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white">Web / API</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-tight">
+                        Geliştirme talepleri
+                    </p>
+                </div>
+            </div>
+
+            <div class="group glass-panel rounded-3xl p-5 border border-white/10 hover:bg-amber-500/15 transition">
+                <div class="flex items-center justify-between">
+                    <div class="p-3 bg-amber-500/15 rounded-2xl">
+                        <span class="material-symbols-outlined text-amber-300">school</span>
+                    </div>
+                    <span class="text-2xl font-black text-slate-900 dark:text-white">
+                        @ViewBag.messageSubjectByEducationOffer
+                    </span>
+                </div>
+                <div class="mt-4">
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white">Eğitim & Kurumsal</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-tight">
+                        Akademik talepler
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

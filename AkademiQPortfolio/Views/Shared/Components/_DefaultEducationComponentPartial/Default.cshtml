@@ -1,0 +1,60 @@
+﻿@model List<AkademiQPortfolio.Entities.Education>
+
+<section class="py-24 px-6 border-b border-white/5" id="education">
+    <div class="max-w-[1200px] mx-auto">
+
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div class="space-y-4">
+                <h3 class="text-primary font-bold tracking-widest uppercase text-sm">Eğitim</h3>
+                <h2 class="text-4xl font-bold">Akademik Yolculuğum</h2>
+            </div>
+            <p class="text-slate-400 max-w-sm">
+                Teknik kariyerimin temelini oluşturan akademik eğitim sürecim
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            @if (Model == null || !Model.Any())
+            {
+                <div class="bg-surface-dark p-8 rounded-2xl border border-white/10 text-slate-400">
+                    Henüz eğitim bilgisi eklenmedi.
+                </div>
+            }
+            else
+            {
+                for (int i = 0; i < Model.Count; i++)
+                {
+                    var item = Model[i];
+                    var icon = (i % 2 == 0) ? "school" : "workspace_premium";
+
+                    <div class="bg-surface-dark p-8 rounded-2xl border border-white/5 hover:border-primary/20 transition-all flex gap-6 items-start">
+                        <div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                            <span class="material-symbols-outlined text-3xl">@icon</span>
+                        </div>
+
+                        <div class="space-y-2 w-full">
+                            <div class="flex justify-between items-start gap-4">
+                                <h4 class="text-xl font-bold">
+                                    @item.Department
+                                </h4>
+
+                                @if (!string.IsNullOrWhiteSpace(item.EducationDate))
+                                {
+                                    <span class="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded whitespace-nowrap">
+                                        @item.EducationDate
+                                    </span>
+                                }
+                            </div>
+
+                            <p class="text-primary/80 font-semibold">
+                                @item.Title
+                            </p>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</section>

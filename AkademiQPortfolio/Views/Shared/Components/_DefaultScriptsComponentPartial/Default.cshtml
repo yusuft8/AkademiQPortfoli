@@ -1,0 +1,63 @@
+﻿<script>
+    (function () {
+      // 1) Smooth scroll (anchor links)
+      document.addEventListener("click", function (e) {
+        const a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+
+        const href = a.getAttribute("href");
+        if (!href || href === "#") return;
+
+        const el = document.querySelector(href);
+        if (!el) return;
+
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        // URL hash update (optional)
+        history.replaceState(null, "", href);
+      });
+
+      // 2) Active nav link on scroll (optional but nice)
+      const sections = Array.from(document.querySelectorAll("section[id]"));
+      const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+
+      if (sections.length && navLinks.length) {
+        const setActive = () => {
+          const y = window.scrollY + 120; // navbar offset
+          let currentId = "";
+
+          for (const sec of sections) {
+            const top = sec.offsetTop;
+            const height = sec.offsetHeight;
+            if (y >= top && y < top + height) {
+              currentId = sec.id;
+              break;
+            }
+          }
+
+          navLinks.forEach(l => {
+            const id = (l.getAttribute("href") || "").replace("#", "");
+            l.classList.toggle("text-primary", id && id === currentId);
+          });
+        };
+
+        window.addEventListener("scroll", setActive, { passive: true });
+        setActive();
+      }
+
+      // 3) (Optional) Dark mode persistence
+      // Eğer ileride "tema değiştir" butonu yaparsan işine yarar:
+      // localStorage'da theme = "dark" / "light" tutar.
+      const root = document.documentElement;
+      const saved = localStorage.getItem("theme");
+      if (saved === "dark") root.classList.add("dark");
+      if (saved === "light") root.classList.remove("dark");
+
+      // Dışarıdan çağırmak için global fonksiyon bırakıyoruz:
+      window.toggleTheme = function () {
+        root.classList.toggle("dark");
+        localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "light");
+      };
+    })();
+</script>

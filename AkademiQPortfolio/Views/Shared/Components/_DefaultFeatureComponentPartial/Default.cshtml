@@ -1,0 +1,74 @@
+﻿@model AkademiQPortfolio.Entities.About
+
+@{
+    var name = Model?.NameSurname ?? "Yusuf TOPAL";
+    var jobTitle = Model?.Title ?? "Software Engineer & UX Designer";
+    var desc = Model?.Description ?? "Kendini tanıtan açıklamayı buraya yaz.";
+    var img = string.IsNullOrWhiteSpace(Model?.ImageURL)
+        ? Url.Content("~/sility/images/foto.jpg")
+        : Model!.ImageURL;
+}
+
+<section class="relative pt-20 pb-32 px-6">
+    <div class="max-w-[1200px] mx-auto">
+        <div class="flex flex-col md:flex-row items-center gap-16 md:gap-24">
+
+            <!-- LEFT (Fotoğraf) -->
+            <div class="relative flex-shrink-0">
+                <div class="profile-aura">
+                    <div class="size-64 md:size-[450px] rounded-full border-4 border-primary/20 overflow-hidden relative z-10 shadow-[0_0_50px_rgba(25,230,107,0.15)]">
+                        <img alt="@name Portrait"
+                             class="w-full h-full object-cover grayscale"
+                             src="~/sility/images/foto.jpg" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="flex-1 space-y-6 text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-bold tracking-wide uppercase">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                        Çalışmaya Açık                </div>
+
+                <div class="space-y-2">
+                    <h1 class="text-4xl md:text-7xl font-black tracking-tight leading-tight">
+                        Merhaba, Ben <br />
+                        <span class="text-white">@name</span>
+                    </h1>
+
+                    <h2 class="text-xl md:text-3xl font-bold text-primary tracking-tight">
+                        @jobTitle
+                    </h2>
+                </div>
+
+                <p class="text-lg text-slate-400 max-w-xl leading-relaxed">
+                    @desc
+                </p>
+
+                <div class="flex items-center gap-4 pt-2">
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                        <span class="material-symbols-outlined text-3xl">link</span>
+                    </a>
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                        <span class="material-symbols-outlined text-3xl">groups</span>
+                    </a>
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                        <span class="material-symbols-outlined text-3xl">alternate_email</span>
+                    </a>
+                </div>
+
+                <div class="pt-6">
+                    <a href="#contact"
+                       class="green-gradient-btn px-6 py-3 text-background-dark rounded-lg font-semibold text-sm glow-green inline-flex items-center gap-2 hover:scale-105 transition-all">
+                        <span class="material-symbols-outlined text-base">mail</span>
+                        İletişime Geç
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

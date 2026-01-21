@@ -1,0 +1,58 @@
+﻿@model AkademiQPortfolio.Entities.Message
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Mesaj Ekle";
+}
+
+<div class="max-w-4xl mx-auto p-6 space-y-6">
+    <div>
+        <h2 class="text-3xl font-black text-slate-900 dark:text-white">Mesaj Ekle</h2>
+        <p class="text-slate-500 dark:text-slate-400">Test için manuel mesaj ekleyebilirsin.</p>
+    </div>
+
+    <form method="post" class="glass-panel rounded-2xl p-8 space-y-6">
+        @Html.AntiForgeryToken()
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+                <label class="block text-sm font-bold text-slate-400 mb-2">Gönderen Ad</label>
+                <input asp-for="SenderName" class="w-full rounded-xl border border-slate-700 bg-slate-900 p-4 text-white" />
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-400 mb-2">Gönderen Mail</label>
+                <input asp-for="SenderMail" class="w-full rounded-xl border border-slate-700 bg-slate-900 p-4 text-white" />
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-sm font-bold text-slate-400 mb-2">Konu</label>
+            <input asp-for="MessageSubject" class="w-full rounded-xl border border-slate-700 bg-slate-900 p-4 text-white" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-bold text-slate-400 mb-2">Mesaj</label>
+            <textarea asp-for="MessageText" rows="6"
+                      class="w-full rounded-xl border border-slate-700 bg-slate-900 p-4 text-white"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+                <label class="block text-sm font-bold text-slate-400 mb-2">Tarih</label>
+                <input asp-for="SendDate" type="datetime-local"
+                       class="w-full rounded-xl border border-slate-700 bg-slate-900 p-4 text-white" />
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-400 mb-2">Okundu</label>
+                <select asp-for="IsRead" class="w-full rounded-xl border border-slate-700 bg-slate-900 p-4 text-white">
+                    <option value="false">Hayır</option>
+                    <option value="true">Evet</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="flex justify-end gap-3">
+            <a asp-action="Index" class="px-6 py-3 rounded-xl bg-white/10 text-white font-bold">Geri</a>
+            <button class="px-6 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary/90">Kaydet</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,81 @@
+﻿@model List<AkademiQPortfolio.Entities.Education>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Eğitim";
+}
+
+<div class="p-6">
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">Eğitim</h2>
+            <p class="text-slate-500 dark:text-slate-400">Eğitim kayıtlarını buradan yönetebilirsin.</p>
+        </div>
+
+        <a asp-controller="AdminEducation" asp-action="Create"
+           class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-6 rounded-xl flex items-center gap-2 transition-all shadow-lg shadow-primary/20">
+            <span class="material-symbols-outlined">add</span>
+            Yeni Eğitim
+        </a>
+    </div>
+
+    <div class="glass-panel rounded-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-white/5 border-b border-white/10">
+                        <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Başlık</th>
+                        <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Bölüm</th>
+                        <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Tarih</th>
+                        <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider text-right">İşlemler</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-white/10">
+                    @if (Model == null || !Model.Any())
+                    {
+                        <tr>
+                            <td colspan="4" class="px-6 py-10 text-slate-400">
+                                Henüz eğitim kaydı yok.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="px-6 py-6">
+                                    <span class="font-semibold text-slate-900 dark:text-white">@item.Title</span>
+                                </td>
+
+                                <td class="px-6 py-6">
+                                    <span class="text-slate-600 dark:text-slate-300">@item.Department</span>
+                                </td>
+
+                                <td class="px-6 py-6">
+                                    <span class="text-slate-500 dark:text-slate-400 text-sm">@item.EducationDate</span>
+                                </td>
+
+                                <td class="px-6 py-6 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        <a asp-controller="AdminEducation" asp-action="Update" asp-route-id="@item.EducationId"
+                                           class="px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary text-sm font-bold transition-all border border-primary/20">
+                                            Güncelle
+                                        </a>
+
+                                        <a asp-controller="AdminEducation" asp-action="Delete" asp-route-id="@item.EducationId"
+                                           class="px-4 py-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-500 text-sm font-bold transition-all border border-red-500/20"
+                                           onclick="return confirm('Silmek istediğine emin misin?');">
+                                            Sil
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿<section id="contact" class="scroll-mt-28 py-24 px-6 bg-gradient-to-b from-transparent to-primary/5">
+    <div class="max-w-[700px] mx-auto">
+
+        <div class="text-center mb-12 space-y-4">
+            <h2 class="text-4xl md:text-5xl font-black">
+                Let's build something <span class="text-primary italic">extraordinary</span>
+            </h2>
+            <p class="text-slate-400">
+                Proje, işbirliği veya danışmanlık için bana ulaş.
+            </p>
+        </div>
+
+        <form asp-controller="Contact" asp-action="SendMessage" method="post"
+              class="space-y-6 bg-surface-dark p-8 rounded-2xl border border-white/10">
+
+            <!-- İsim -->
+            <div>
+                <label class="text-sm font-semibold">Ad Soyad</label>
+                <input type="text" name="SenderName" required
+                       class="w-full mt-2 bg-white/5 border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-primary" />
+            </div>
+
+            <!-- Mail -->
+            <div>
+                <label class="text-sm font-semibold">E-mail</label>
+                <input type="email" name="SenderMail" required
+                       class="w-full mt-2 bg-white/5 border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-primary" />
+            </div>
+
+            <!-- Konu (DROPDOWN) -->
+            <div>
+                <label class="text-sm font-semibold">Konu</label>
+                <select name="MessageSubject"
+                        class="w-full rounded-xl border border-white/10 bg-surface-dark text-slate-100
+               px-4 py-3 outline-none focus:ring-2 focus:ring-primary/40
+               [color-scheme:dark]">
+                    <option value="" class="bg-surface-dark text-slate-300">Seçiniz</option>
+                    <option value="Proje teklifi" class="bg-surface-dark text-slate-100">Proje teklifi</option>
+                    <option value="İşbirliği" class="bg-surface-dark text-slate-100">İşbirliği</option>
+                    <option value="Eğitim/Kurumsal eğitim talebi" class="bg-surface-dark text-slate-100">Eğitim/Kurumsal eğitim talebi</option>
+                    <option value="Web API geliştirme talebi" class="bg-surface-dark text-slate-100">Web API geliştirme talebi</option>
+                    <option value="Teknik destek/Danışmanlık" class="bg-surface-dark text-slate-100">Teknik destek/Danışmanlık</option>
+                    <option value="Diğer" class="bg-surface-dark text-slate-100">Diğer</option>
+                </select>
+            </div>
+
+            <!-- Mesaj -->
+            <div>
+                <label class="text-sm font-semibold">Mesaj</label>
+                <textarea name="MessageText" rows="4" required
+                          class="w-full mt-2 bg-white/5 border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-primary"></textarea>
+            </div>
+
+            <!-- Gönder -->
+            <button type="submit"
+                    class="w-full green-gradient-btn py-3 rounded-xl font-bold text-background-dark glow-green hover:scale-[1.02] transition">
+                Mesaj Gönder
+            </button>
+
+        </form>
+    </div>
+</section>

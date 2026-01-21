@@ -1,0 +1,41 @@
+﻿@model AkademiQPortfolio.Entities.Education
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Yeni Eğitim";
+}
+
+<div class="p-6 max-w-2xl">
+    <h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-6">Yeni Eğitim Ekle</h2>
+
+    <form asp-controller="AdminEducation" asp-action="Create" method="post" class="space-y-4">
+
+        <div>
+            <label class="block text-sm font-medium mb-1 text-slate-200">Başlık</label>
+            <input asp-for="Title" class="w-full rounded-lg border border-slate-700 bg-slate-900 p-3 text-white" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1 text-slate-200">Bölüm</label>
+            <input asp-for="Department" class="w-full rounded-lg border border-slate-700 bg-slate-900 p-3 text-white" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1 text-slate-200">Eğitim Tarihi</label>
+            <input asp-for="EducationDate" class="w-full rounded-lg border border-slate-700 bg-slate-900 p-3 text-white" />
+        </div>
+
+        <div class="flex gap-2 pt-2">
+            <button type="submit"
+                    class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg shadow-primary/20">
+                Kaydet
+            </button>
+
+            <a asp-action="Index"
+               class="px-6 py-3 rounded-xl bg-slate-700 text-white font-bold hover:opacity-90 transition-all">
+                Vazgeç
+            </a>
+        </div>
+
+    </form>
+</div>

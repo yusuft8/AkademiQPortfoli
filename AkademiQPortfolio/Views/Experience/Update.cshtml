@@ -1,0 +1,59 @@
+﻿@model AkademiQPortfolio.Entities.Experience
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="mx-auto w-full max-w-3xl px-6 py-8">
+    <div class="mb-6 flex items-center justify-between">
+        <div>
+            <h1 class="text-3xl font-extrabold tracking-tight">Deneyim Güncelle</h1>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Kayıt bilgilerini düzenle.</p>
+        </div>
+
+        <a asp-controller="Experience" asp-action="Index"
+           class="rounded-xl bg-white/10 px-4 py-2 text-sm font-bold hover:bg-white/15 transition">
+            Geri
+        </a>
+    </div>
+
+    <form asp-controller="Experience" asp-action="Update" method="post"
+          class="space-y-5 rounded-2xl border border-white/10 bg-white/5 p-6">
+
+        <input type="hidden" asp-for="Experiencid" />
+
+        <div>
+            <label class="text-sm font-semibold">Firma Adı</label>
+            <input asp-for="CompanyName"
+                   class="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none focus:ring-2 focus:ring-primary/40" />
+        </div>
+
+        <div>
+            <label class="text-sm font-semibold">Tarih</label>
+            <input asp-for="WorkDate"
+                   class="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none focus:ring-2 focus:ring-primary/40" />
+        </div>
+
+        <div>
+            <label class="text-sm font-semibold">Başlık</label>
+            <input asp-for="Tittle"
+                   class="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none focus:ring-2 focus:ring-primary/40" />
+        </div>
+
+        <div>
+            <label class="text-sm font-semibold">Açıklama</label>
+            <textarea asp-for="Description" rows="4"
+                      class="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none focus:ring-2 focus:ring-primary/40"></textarea>
+        </div>
+
+        <div>
+            <label class="text-sm font-semibold">Icon URL</label>
+            <input asp-for="IconUrl"
+                   class="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none focus:ring-2 focus:ring-primary/40" />
+        </div>
+
+        <button type="submit"
+                class="w-full rounded-xl bg-primary py-3 font-extrabold text-white shadow-lg shadow-primary/20 hover:brightness-110 transition">
+            Güncelle
+        </button>
+    </form>
+</div>

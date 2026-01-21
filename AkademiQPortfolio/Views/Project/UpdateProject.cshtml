@@ -1,0 +1,21 @@
+﻿@model AkademiQPortfolio.Entities.Work
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="text-xl font-bold mb-4">Projeyi Güncelle</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="WorkId" />
+
+    <label>Başlık</label>
+    <input type="text" asp-for="Title" class="w-full p-2 mb-3 bg-slate-800 rounded" />
+
+    <label>Alt Başlık</label>
+    <input type="text" asp-for="SubTitle" class="w-full p-2 mb-3 bg-slate-800 rounded" />
+
+    <label>Resim Url</label>
+    <input type="text" asp-for="ImageUrl" class="w-full p-2 mb-3 bg-slate-800 rounded" />
+
+    <button class="bg-yellow-500 px-4 py-2 rounded">Güncelle</button>
+</form>

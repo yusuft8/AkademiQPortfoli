@@ -1,0 +1,88 @@
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+    string activeClass =
+        "flex items-center gap-3 rounded-full bg-primary px-4 py-3 text-white shadow-lg shadow-primary/20 transition-all hover:brightness-110";
+
+    string passiveClass =
+        "group flex items-center gap-3 rounded-full px-4 py-3 text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800/50";
+
+    var unread = (int)(ViewBag.UnreadCount ?? 0);
+}
+
+<nav class="flex flex-col gap-2">
+    <!-- Dashboard -->
+    <a class="@(currentController == "Statistics" && currentAction == "StatisticsCards" ? activeClass : passiveClass)"
+       asp-controller="Statistics" asp-action="StatisticsCards">
+        <span class="material-symbols-outlined @(currentController == "Statistics" && currentAction == "StatisticsCards" ? "text-white" : "group-hover:text-primary") transition-colors">
+            dashboard
+        </span>
+        <span class="text-sm font-semibold">Dashboard</span>
+    </a>
+    <!-- Projelerim -->
+    <a class="@(currentController == "Project" && currentAction == "ProjectList" ? activeClass : passiveClass)"
+       asp-controller="Project" asp-action="ProjectList">
+        <span class="material-symbols-outlined @(currentController == "Project" && currentAction == "ProjectList" ? "text-white" : "group-hover:text-primary") transition-colors">
+            folder_open
+        </span>
+        <span class="text-sm font-medium">Projelerim</span>
+    </a>
+
+
+    <!-- Yeteneklerim -->
+    <a class="@(currentController == "Skill" && currentAction == "SkillList" ? activeClass : passiveClass)"
+       asp-controller="Skill" asp-action="SkillList">
+        <span class="material-symbols-outlined @(currentController == "Skill" && currentAction == "SkillList" ? "text-white" : "group-hover:text-primary") transition-colors">
+            code
+        </span>
+        <span class="text-sm font-medium">Yeteneklerim</span>
+    </a>
+
+
+
+    <!-- Deneyimlerim -->
+    <a class="@(currentController == "Experience" ? activeClass : passiveClass)"
+       asp-controller="Experience" asp-action="Index">
+        <span class="material-symbols-outlined @(currentController == "Experience" ? "text-white" : "group-hover:text-primary") transition-colors">
+            history_edu
+        </span>
+        <span class="text-sm font-medium">Deneyimlerim</span>
+    </a>
+
+
+    <!-- Mesajlar (Dinamik badge) -->
+    <a class="@(currentController == "AdminMessage" ? activeClass : passiveClass)"
+       asp-controller="AdminMessage" asp-action="Index">
+        <span class="material-symbols-outlined @(currentController == "AdminMessage" ? "text-white" : "group-hover:text-primary") transition-colors">
+            mail
+        </span>
+        <span class="text-sm font-medium">Mesajlar</span>
+
+        @if (unread > 0)
+        {
+            <span class="ml-auto flex h-5 min-w-[20px] px-1 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
+                @unread
+            </span>
+        }
+    </a>
+
+    <!-- Eğitim -->
+    <a class="@(currentController == "AdminEducation" ? activeClass : passiveClass)"
+       asp-controller="AdminEducation" asp-action="Index">
+        <span class="material-symbols-outlined @(currentController == "AdminEducation" ? "text-white" : "group-hover:text-primary") transition-colors">
+            school
+        </span>
+        <span class="text-sm font-medium">Eğitim</span>
+    </a>
+
+    <!-- Hakkımda -->
+    <a class="@(currentController == "AdminAbout" ? activeClass : passiveClass)"
+       asp-controller="AdminAbout" asp-action="Index">
+        <span class="material-symbols-outlined @(currentController == "AdminAbout" ? "text-white" : "group-hover:text-primary") transition-colors">
+            person
+        </span>
+        <span class="text-sm font-medium">Hakkımda</span>
+    </a>
+
+</nav>

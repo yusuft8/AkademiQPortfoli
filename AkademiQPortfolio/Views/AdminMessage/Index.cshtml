@@ -1,0 +1,306 @@
+﻿@model List<AkademiQPortfolio.Entities.Message>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Mesajlar";
+
+    var tab = (ViewBag.Tab as string) ?? "all";
+    int unreadCount = ViewBag.UnreadCount ?? 0;
+    int totalCount = ViewBag.TotalCount ?? 0;
+}
+
+<style>
+    .glass-card {
+        background: rgba(35, 41, 72, 0.40);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+</style>
+
+<div class="w-full px-6 lg:px-10 py-6">
+    <!-- Top Bar -->
+    <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between mb-6">
+        <div class="flex items-center gap-3">
+            <h2 class="text-2xl font-black tracking-tight text-slate-900 dark:text-white">Inbox</h2>
+            <span class="text-xs font-black px-2 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary">
+                @(unreadCount) Unread
+            </span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+            <div class="relative w-full sm:w-[380px]">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">search</span>
+                <input id="searchBox"
+                       class="w-full rounded-xl border border-slate-700 bg-slate-900 p-3 pl-11 text-white
+                              focus:outline-none focus:ring-2 focus:ring-primary"
+                       placeholder="Gönderen / konu / içerik ara..." />
+            </div>
+
+            <button id="btnMarkAllRead"
+                    class="h-11 px-5 rounded-xl bg-primary hover:bg-primary/90 text-white font-black shadow-lg shadow-primary/30">
+                Mark all as read
+            </button>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex gap-6 border-b border-white/10 mb-6">
+        <a class="pb-4 text-sm font-black @(tab=="all" ? "text-primary border-b-2 border-primary" : "text-slate-500 hover:text-white")"
+           asp-controller="AdminMessage" asp-action="Index" asp-route-tab="all">
+            All Messages <span class="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-white/5">@totalCount</span>
+        </a>
+
+        <a class="pb-4 text-sm font-black @(tab=="unread" ? "text-primary border-b-2 border-primary" : "text-slate-500 hover:text-white")"
+           asp-controller="AdminMessage" asp-action="Index" asp-route-tab="unread">
+            Unread <span class="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary">@unreadCount</span>
+        </a>
+    </div>
+
+    <!-- List -->
+    <div id="messageList" class="grid grid-cols-1 gap-4">
+
+        @foreach (var item in Model)
+        {
+            var isUnread = item.IsRead != true;
+            var initials = string.Join("", (item.SenderName ?? "U").Split(' ', System.StringSplitOptions.RemoveEmptyEntries)
+            .Select(x => x[0]).Take(2)).ToUpper();
+
+            <div class="message-card glass-card p-5 rounded-2xl flex items-center justify-between hover:border-primary/40 transition-all shadow-sm"
+                 data-id="@item.MessageId"
+                 data-search="@($"{item.SenderName} {item.SenderMail} {item.MessageSubject} {item.MessageText}".ToLower())">
+
+                <div class="flex items-center gap-5 flex-1 min-w-0">
+                    <div class="relative">
+                        <div class="flex items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl w-14 h-14 shadow-md text-white font-black text-lg">
+                            @initials
+                        </div>
+
+                        @if (isUnread)
+                        {
+                            <span class="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full ring-4 ring-background-dark"></span>
+                        }
+                    </div>
+
+                    <div class="flex flex-col gap-1 min-w-0">
+                        <div class="flex items-center gap-3">
+                            <h3 class="text-slate-900 dark:text-white text-base font-black truncate">@item.SenderName</h3>
+                            <span class="text-xs font-bold text-slate-400">@((item.SendDate?.ToString("dd.MM.yyyy HH:mm")) ?? "-")</span>
+                        </div>
+
+                        <h4 class="@(isUnread ? "text-primary" : "text-slate-200") font-black text-sm truncate">
+                            @item.MessageSubject
+                        </h4>
+
+                        <p class="text-slate-500 dark:text-slate-400 text-sm truncate">
+                            @item.MessageText
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 shrink-0">
+                    <span class="hidden lg:inline-flex items-center px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest
+                                    @(isUnread ? "bg-primary/10 text-primary" : "bg-white/5 text-slate-400")">
+                        @(isUnread ? "Unread" : "Read")
+                    </span>
+
+                    <button type="button"
+                            class="btnView bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl text-sm font-black shadow-md shadow-primary/20 transition-all flex items-center gap-2">
+                        <span>View Message</span>
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- MODAL -->
+<div id="modalOverlay" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+    <div class="relative w-full max-w-3xl rounded-2xl overflow-hidden border border-white/10 glass-card">
+
+        <!-- Close -->
+        <button id="btnCloseModal" class="absolute top-5 right-5 text-slate-400 hover:text-white transition-colors">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+
+        <!-- Header -->
+        <div class="p-8 border-b border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="flex items-center gap-5">
+                <div id="modalAvatar" class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary font-black text-xl">
+                    JD
+                </div>
+                <div>
+                    <p id="modalSender" class="text-2xl font-black text-white">—</p>
+                    <p id="modalMail" class="text-sm text-slate-400">—</p>
+                    <p class="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[16px] text-primary">schedule</span>
+                        <span id="modalDate">—</span>
+                    </p>
+                </div>
+            </div>
+
+            <span id="modalBadge" class="text-xs font-black px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 w-fit">
+                UNREAD
+            </span>
+        </div>
+
+        <!-- Subject -->
+        <div class="px-8 pt-6">
+            <h3 id="modalSubject" class="text-lg font-black text-white">—</h3>
+        </div>
+
+        <!-- Body -->
+        <div class="px-8 py-5 max-h-[420px] overflow-y-auto">
+            <p id="modalText" class="text-slate-200 leading-relaxed whitespace-pre-line">—</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="px-8 py-6 bg-white/5 border-t border-white/10 flex items-center justify-between">
+            <div class="flex gap-3">
+                <button id="btnMarkUnread" class="h-12 px-5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-black">
+                    Mark as Unread
+                </button>
+                <button id="btnMarkRead" class="h-12 px-5 rounded-xl bg-primary hover:bg-primary/90 text-white font-black shadow-lg shadow-primary/30">
+                    Mark as Read
+                </button>
+            </div>
+
+            <div class="flex gap-2">
+                <button id="btnDelete" class="w-12 h-12 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
+                    <span class="material-symbols-outlined">delete</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Search (client-side)
+    const searchBox = document.getElementById('searchBox');
+    const cards = Array.from(document.querySelectorAll('.message-card'));
+    searchBox?.addEventListener('input', () => {
+        const q = (searchBox.value || '').toLowerCase().trim();
+        cards.forEach(c => {
+            const hay = c.getAttribute('data-search') || '';
+            c.style.display = hay.includes(q) ? '' : 'none';
+        });
+    });
+
+    // Modal elements
+    const overlay = document.getElementById('modalOverlay');
+    const btnClose = document.getElementById('btnCloseModal');
+
+    const modalSender = document.getElementById('modalSender');
+    const modalMail = document.getElementById('modalMail');
+    const modalDate = document.getElementById('modalDate');
+    const modalSubject = document.getElementById('modalSubject');
+    const modalText = document.getElementById('modalText');
+    const modalBadge = document.getElementById('modalBadge');
+    const modalAvatar = document.getElementById('modalAvatar');
+
+    const btnMarkUnread = document.getElementById('btnMarkUnread');
+    const btnMarkRead = document.getElementById('btnMarkRead');
+    const btnDelete = document.getElementById('btnDelete');
+    const btnMarkAllRead = document.getElementById('btnMarkAllRead');
+
+    let currentMessageId = null;
+
+    function initials(name) {
+        const parts = (name || 'U').trim().split(/\s+/).filter(Boolean);
+        return parts.slice(0,2).map(x => x[0].toUpperCase()).join('');
+    }
+
+    function openModal() {
+        overlay.classList.remove('hidden');
+        overlay.classList.add('flex');
+    }
+
+    function closeModal() {
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+        currentMessageId = null;
+    }
+
+    btnClose?.addEventListener('click', closeModal);
+    overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    async function fetchMessage(id) {
+        const res = await fetch(`/AdminMessage/GetMessage?id=${id}`);
+        if (!res.ok) throw new Error("Mesaj alınamadı");
+        return await res.json();
+    }
+
+    async function setRead(id, isRead) {
+        const res = await fetch(`/AdminMessage/SetRead?id=${id}&isRead=${isRead}`, { method: 'POST' });
+        if (!res.ok) throw new Error("Güncelleme başarısız");
+        return await res.json();
+    }
+
+    async function deleteMessage(id) {
+        const res = await fetch(`/AdminMessage/Delete?id=${id}`, { method: 'POST' });
+        if (!res.ok) throw new Error("Silme başarısız");
+        return await res.json();
+    }
+
+    async function markAllRead() {
+        const res = await fetch(`/AdminMessage/MarkAllRead`, { method: 'POST' });
+        if (!res.ok) throw new Error("İşlem başarısız");
+        return await res.json();
+    }
+
+    // View button click
+    document.querySelectorAll('.btnView').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const card = e.target.closest('.message-card');
+            const id = card.getAttribute('data-id');
+            if (!id) return;
+
+            const data = await fetchMessage(id);
+            currentMessageId = data.messageId;
+
+            modalSender.innerText = data.senderName;
+            modalMail.innerText = data.senderMail;
+            modalDate.innerText = data.date;
+            modalSubject.innerText = data.subject;
+            modalText.innerText = data.text;
+
+            modalAvatar.innerText = initials(data.senderName);
+
+            modalBadge.innerText = data.isRead ? "READ" : "UNREAD";
+            modalBadge.className = data.isRead
+                ? "text-xs font-black px-3 py-1 rounded-full bg-white/5 text-slate-300 border border-white/10 w-fit"
+                : "text-xs font-black px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 w-fit";
+
+            openModal();
+
+            // İstersen otomatik okundu yap:
+            // await setRead(currentMessageId, true);
+            // location.reload(); // istersen badge güncellesin
+        });
+    });
+
+    // Modal buttons
+    btnMarkUnread?.addEventListener('click', async () => {
+        if (!currentMessageId) return;
+        await setRead(currentMessageId, false);
+        location.reload();
+    });
+
+    btnMarkRead?.addEventListener('click', async () => {
+        if (!currentMessageId) return;
+        await setRead(currentMessageId, true);
+        location.reload();
+    });
+
+    btnDelete?.addEventListener('click', async () => {
+        if (!currentMessageId) return;
+        if (!confirm("Bu mesaj silinsin mi?")) return;
+        await deleteMessage(currentMessageId);
+        location.reload();
+    });
+
+    btnMarkAllRead?.addEventListener('click', async () => {
+        await markAllRead();
+        location.reload();
+    });
+</script>

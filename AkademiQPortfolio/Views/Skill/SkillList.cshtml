@@ -1,0 +1,81 @@
+﻿@model List<Skill>
+@{
+    ViewData["Title"] = "SkillList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="w-full px-6 lg:px-10 py-6 space-y-6">
+
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h1 class="text-4xl font-black tracking-tight text-slate-900 dark:text-white">Yetenek Yönetimi</h1>
+            <p class="text-slate-500 dark:text-slate-400 mt-1">
+                Sistemdeki tüm yetenekleri buradan düzenleyebilir veya silebilirsiniz.
+            </p>
+        </div>
+
+        <a asp-controller="Skill" asp-action="CreateSkill"
+           class="inline-flex items-center px-6 py-3 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold shadow-lg shadow-primary/30 transition">
+            <span class="material-symbols-outlined text-[20px] mr-2">add</span>
+            Yeni Yetenek Ekle
+        </a>
+    </div>
+
+    <div class="glass-panel rounded-2xl p-6 overflow-x-auto border border-white/10">
+
+        <table class="w-full text-left text-sm">
+            <thead>
+                <tr class="text-slate-400 border-b border-white/10">
+                     <th class="py-4 px-4 font-bold uppercase tracking-wider">Yetenek Başlığı</th>
+                    <th class="py-4 px-4 font-bold uppercase tracking-wider">Seviye</th>
+                    <th class="py-4 px-4 font-bold uppercase tracking-wider text-right">İşlemler</th>
+                </tr>
+            </thead>
+
+            <tbody class="text-slate-200">
+                @foreach (var item in Model)
+                {
+                    <tr class="border-b border-white/5 hover:bg-white/5 transition">
+ 
+
+                        <td class="py-4 px-4">
+                            <span class="font-semibold text-slate-900 dark:text-white">@item.SkillTitle</span>
+                        </td>
+
+                        <td class="py-4 px-4">
+                            <div class="flex items-center w-full max-w-md gap-3">
+                                <div class="flex-1 bg-white/10 rounded-full h-3 overflow-hidden">
+                                    <div class="bg-primary h-3 rounded-full transition-all duration-700"
+                                         style="width: @item.SkillValue%"></div>
+                                </div>
+
+                                <span class="text-xs font-black text-primary bg-primary/10 border border-primary/20 px-2 py-1 rounded-lg">
+                                    %@item.SkillValue
+                                </span>
+                            </div>
+                        </td>
+
+                        <td class="py-4 px-4">
+                            <div class="flex justify-end gap-2">
+                                <a asp-controller="Skill" asp-action="UpdateSkill" asp-route-id="@item.Skillİd"
+                                   class="inline-flex items-center px-4 py-2 rounded-lg bg-amber-500/15 text-amber-200 hover:bg-amber-500/25 transition">
+                                    <span class="material-symbols-outlined text-[18px] mr-1">edit</span>
+                                    Düzenle
+                                </a>
+
+                                <a asp-controller="Skill" asp-action="DeleteSkill" asp-route-id="@item.Skillİd"
+                                   onclick="return confirm('Silmek istediğine emin misin?')"
+                                   class="inline-flex items-center px-4 py-2 rounded-lg bg-red-500/15 text-red-200 hover:bg-red-500/25 transition">
+                                    <span class="material-symbols-outlined text-[18px] mr-1">delete</span>
+                                    Sil
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>

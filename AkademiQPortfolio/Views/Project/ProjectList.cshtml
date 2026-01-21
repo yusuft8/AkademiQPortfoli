@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model List<AkademiQPortfolio.Entities.Work>
+
+<div class="p-6">
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold">Projeler</h2>
+
+        <a asp-controller="Project" asp-action="CreateProject"
+           class="px-4 py-2 rounded-lg bg-primary text-white font-semibold">
+            Yeni Proje Ekle
+        </a>
+    </div>
+
+    <div class="overflow-hidden rounded-xl border border-white/10">
+        <table class="w-full text-sm">
+            <thead class="bg-white/5">
+                <tr>
+                    <th class="text-left p-3">Başlık</th>
+                    <th class="text-left p-3">Alt Başlık</th>
+                    <th class="text-left p-3">Görsel</th>
+                    <th class="text-right p-3">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="border-t border-white/10">
+                        <td class="p-3">@item.Title</td>
+                        <td class="p-3">@item.SubTitle</td>
+                        <td class="p-3">
+                            <a href="@item.ImageUrl" target="_blank" class="text-primary underline">
+                                Aç
+                            </a>
+                        </td>
+                        <td class="p-3">
+                            <div class="flex justify-end gap-2">
+                                <a asp-controller="Project" asp-action="UpdateProject" asp-route-id="@item.WorkId"
+                                   class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20">
+                                    Güncelle
+                                </a>
+
+                                <a asp-controller="Project" asp-action="DeleteProject" asp-route-id="@item.WorkId"
+                                   onclick="return confirm('Bu projeyi silmek istediğine emin misin?');"
+                                   class="px-3 py-1.5 rounded-lg bg-red-500/20 text-red-300 hover:bg-red-500/30">
+                                    Sil
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

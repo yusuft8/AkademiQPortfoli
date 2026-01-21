@@ -1,0 +1,48 @@
+﻿@model List<AkademiQPortfolio.Entities.Work>
+
+<section class="py-24 px-6" id="portfolio">
+    <div class="max-w-[1200px] mx-auto">
+
+        <div class="flex justify-between items-center mb-16">
+            <h2 class="text-4xl font-bold">Projelerim</h2>
+
+            <a class="text-primary font-bold flex items-center gap-2 hover:underline" href="#portfolio">
+                Tümünü Gör <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            @if (Model == null || !Model.Any())
+            {
+                <div class="col-span-full bg-surface-dark border border-white/10 rounded-2xl p-8 text-slate-400">
+                    Henüz proje eklenmemiş.
+                </div>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <div class="group relative overflow-hidden rounded-2xl border border-white/5 bg-surface-dark transition-all hover:-translate-y-2">
+
+                        <div class="aspect-[16/10] overflow-hidden">
+                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                                 src="@(string.IsNullOrWhiteSpace(item.ImageUrl) ? "/images/placeholder.jpg" : item.ImageUrl)" />
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                                @(item.Title ?? "Başlık yok")
+                            </h3>
+
+                            <p class="text-sm text-slate-400 line-clamp-2">
+                                @(item.SubTitle ?? "Açıklama yok")
+                            </p>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</section>

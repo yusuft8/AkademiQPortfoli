@@ -1,0 +1,62 @@
+﻿@model List<AkademiQPortfolio.Entities.Skill>
+
+<section class="py-24 px-6" id="skills">
+    <div class="max-w-[1200px] mx-auto">
+
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div class="space-y-4">
+                <h3 class="text-primary font-bold tracking-widest uppercase text-sm">Yeteneklerim</h3>
+                <h2 class="text-4xl font-bold">Becerilerim  &amp; Yeterliliklerim</h2>
+            </div>
+            <p class="text-slate-400 max-w-sm">
+                Dijital inovasyonun en ileri noktasında kalabilmek için araç takımımı sürekli geliştiriyorum.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            @if (Model == null || !Model.Any())
+            {
+                <div class="bg-surface-dark p-8 rounded-2xl border border-white/5 text-slate-400">
+                    Henüz yetenek eklenmedi.
+                </div>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    var value = item.SkillValue; // int? ise aşağıdaki gibi güvenli yap:
+                                                 // var value = item.SkillValue ?? 0;
+
+                    var icon = "code";
+                    if (value >= 80) icon = "bolt";
+                    else if (value >= 60) icon = "monitoring";
+                    else icon = "school";
+
+                    <div class="bg-surface-dark p-8 rounded-2xl border border-white/5 hover:border-primary/20 transition-all group">
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">@icon</span>
+                            </div>
+
+                            <span class="text-2xl font-black text-primary">%@value</span>
+                        </div>
+
+                        <h4 class="text-xl font-bold mb-2">@item.SkillTitle</h4>
+
+                        <p class="text-sm text-slate-400 mb-6">
+                            @* İstersen buraya açıklama alanı ekleyebilirsin; tabloda yoksa boş kalsın *@
+                            @(" ")
+                        </p>
+
+                        <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-primary rounded-full group-hover:glow-green transition-all duration-1000"
+                                 style="width: @value%"></div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</section>

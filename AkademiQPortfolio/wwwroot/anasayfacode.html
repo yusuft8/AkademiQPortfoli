@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="dark" lang="tr">
+
+@await Component.InvokeAsync("_DefaultHeadComponentPartial")
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Yusuf Topal | Software Engineer &amp; Designer</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19e66b",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#0a0a0a",
+                        "surface-dark": "#112117",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .glow-green {
+            box-shadow: 0 0 15px rgba(25, 230, 107, 0.4);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 10px rgba(25, 230, 107, 0.3);
+        }
+
+        .grid-pattern {
+            background-image: radial-gradient(#19e66b 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+        }
+
+        .profile-aura {
+            position: relative;
+        }
+
+            .profile-aura::before {
+                content: '';
+                position: absolute;
+                inset: -20px;
+                background: radial-gradient(circle, rgba(25, 230, 107, 0.25) 0%, transparent 70%);
+                border-radius: 50%;
+                z-index: -1;
+            }
+
+        .green-gradient-btn {
+            background: linear-gradient(135deg, #19e66b 0%, #0fb853 100%);
+        }
+    </style>
+</head>
+
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-background-dark">
+    <nav class="sticky top-0 z-50 w-full border-b border-white/5 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+        <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="size-8 bg-primary rounded flex items-center justify-center text-background-dark">
+                    <span class="material-symbols-outlined font-bold">terminal</span>
+                </div>
+                <h2 class="text-xl font-800 tracking-tighter uppercase">Yusuf Topal</h2>
+            </div>
+            <div class="hidden md:flex items-center gap-10">
+                <a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Ana Sayfa</a>
+                <a class="text-sm font-semibold hover:text-primary transition-colors" href="#about">Hakkımda</a>
+                <a class="text-sm font-semibold hover:text-primary transition-colors" href="#skills">Yeteneklerim</a>
+                <a class="text-sm font-semibold hover:text-primary transition-colors" href="#experience">Deneyim</a>
+                <a class="text-sm font-semibold hover:text-primary transition-colors" href="#portfolio">Projelerim</a>
+                <button class="bg-primary text-background-dark px-6 py-2.5 rounded-lg text-sm font-bold hover:opacity-90 transition-all glow-green">
+                    İletişime Geç
+                </button>
+            </div>
+        </div>
+    </nav>
+    <main class="relative">
+        <div class="absolute inset-0 grid-pattern pointer-events-none"></div>
+        <section class="relative pt-20 pb-32 px-6">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="flex flex-col md:flex-row items-center gap-16 md:gap-24">
+                    <div class="relative flex-shrink-0">
+                        <div class="profile-aura">
+                            <div class="size-64 md:size-[450px] rounded-full border-4 border-primary/20 overflow-hidden relative z-10 shadow-[0_0_50px_rgba(25,230,107,0.15)]">
+                                <img alt="Yusuf Topal Portrait" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa3OBDi6ssszMUrKlv2ve_Ce__5jXhcpLoDL-oNsjjveQqp8aiBwWoOehdRwmPTmRa63Z1_Vy7BXD63TPhjnpCeJCRVZB5eK8dQtXp6hnEEznalOrKm3eXAD5-IFfrlirjBhWaNHDWW98y2KZ9GLuarb1WKs5ZussLIfs2Jh7W3K2g0i9UvHHaSXdj6L0gP3iTevDGIAbm3mPZXuhbA3ZuLk_24ahQISBc9MZ3iz8VdYJ0z3g9RgPVqLX3azBbld2TAFPvLv0u4Q0" />
+                            </div>
+                        </div>
+                    </div>
+                 
+                    
+                    
+                    <div class="flex-1 space-y-6 text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-bold tracking-wide uppercase">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                            </span>
+                            Available for work
+                        </div>
+                        <div class="space-y-2">
+                            <h1 class="text-4xl md:text-7xl font-black tracking-tight leading-tight">
+                                Merhaba, Ben <br />
+                                <span class="text-white">Yusuf TOPAL</span>
+                            </h1>
+                            <h2 class="text-xl md:text-3xl font-bold text-primary tracking-tight">
+                                Software Engineer &amp; UX Designer
+                            </h2>
+                        </div>
+                        <p class="text-lg text-slate-400 max-w-xl leading-relaxed">
+                            I am a Computer Scientist and Software Engineer with a strong focus on React.js, Next.js, TypeScript, and modern web architectures. Experienced in building scalable web applications with high-performance metrics and integrating RESTful APIs. Passionate about transforming complex designs into pixel-perfect, responsive user interfaces.
+                        </p>
+                        <div class="flex items-center gap-4 pt-2">
+                            <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                                <span class="material-symbols-outlined text-3xl">link</span>
+                            </a>
+                            <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                                <span class="material-symbols-outlined text-3xl">groups</span>
+                            </a>
+                            <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                                <span class="material-symbols-outlined text-3xl">alternate_email</span>
+                            </a>
+                        </div>
+                        <div class="pt-6">
+                            <button class="green-gradient-btn px-10 py-4 text-background-dark rounded-xl font-bold text-lg glow-green flex items-center gap-3 hover:scale-105 transition-all">
+                                <span class="material-symbols-outlined">mail</span>
+                                İletişime Geç
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-6 border-y border-white/5 bg-white/[0.02]" id="about">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-primary rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                        <div class="relative size-64 md:size-80 bg-surface-dark rounded-2xl overflow-hidden border border-white/10">
+                            <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa3OBDi6ssszMUrKlv2ve_Ce__5jXhcpLoDL-oNsjjveQqp8aiBwWoOehdRwmPTmRa63Z1_Vy7BXD63TPhjnpCeJCRVZB5eK8dQtXp6hnEEznalOrKm3eXAD5-IFfrlirjBhWaNHDWW98y2KZ9GLuarb1WKs5ZussLIfs2Jh7W3K2g0i9UvHHaSXdj6L0gP3iTevDGIAbm3mPZXuhbA3ZuLk_24ahQISBc9MZ3iz8VdYJ0z3g9RgPVqLX3azBbld2TAFPvLv0u4Q0" />
+                        </div>
+                    </div>
+                    <div class="flex-1 space-y-6">
+                        <h3 class="text-primary font-bold tracking-widest uppercase text-sm">Hakkımda</h3>
+                        <h2 class="text-3xl md:text-4xl font-bold leading-tight">
+                            Merging aesthetic precision with <br /> robust engineering logic.
+                        </h2>
+                        <p class="text-lg text-slate-400 leading-relaxed">
+                            I am Yusuf Topal, a multidisciplinary creator based in Turkey. With a background spanning across full-stack development and data science, I build applications that are not just functional, but visually striking and highly optimized. My approach is data-driven and user-centric.
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <div class="flex items-center gap-2 text-slate-300">
+                                <span class="material-symbols-outlined text-primary">location_on</span>
+                                <span>Istanbul, Turkey</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-slate-300">
+                                <span class="material-symbols-outlined text-primary">verified</span>
+                                <span>8+ Years Experience</span>
+                            </div>
+                        </div>
+                        <button class="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 rounded-lg text-sm font-bold border border-white/10 transition-all">
+                            <span class="material-symbols-outlined">download</span> Download CV
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-6" id="skills">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <div class="space-y-4">
+                        <h3 class="text-primary font-bold tracking-widest uppercase text-sm">Yeteneklerim</h3>
+                        <h2 class="text-4xl font-bold">Skills &amp; Proficiencies</h2>
+                    </div>
+                    <p class="text-slate-400 max-w-sm">Continuously evolving my toolkit to stay at the cutting edge of digital innovation.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-surface-dark p-8 rounded-2xl border border-white/5 hover:border-primary/20 transition-all group">
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">code</span>
+                            </div>
+                            <span class="text-2xl font-black text-primary">95%</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Frontend Engineering</h4>
+                        <p class="text-sm text-slate-400 mb-6">React, Next.js, Tailwind CSS, TypeScript</p>
+                        <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-primary rounded-full group-hover:glow-green transition-all duration-1000" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-surface-dark p-8 rounded-2xl border border-white/5 hover:border-primary/20 transition-all group">
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">storage</span>
+                            </div>
+                            <span class="text-2xl font-black text-primary">88%</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Backend &amp; Cloud</h4>
+                        <p class="text-sm text-slate-400 mb-6">Node.js, PostgreSQL, Docker, AWS</p>
+                        <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-primary rounded-full group-hover:glow-green transition-all duration-1000" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-surface-dark p-8 rounded-2xl border border-white/5 hover:border-primary/20 transition-all group">
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">monitoring</span>
+                            </div>
+                            <span class="text-2xl font-black text-primary">82%</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Data Analytics</h4>
+                        <p class="text-sm text-slate-400 mb-6">Python, Pandas, Tableau, ML Models</p>
+                        <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-primary rounded-full group-hover:glow-green transition-all duration-1000" style="width: 82%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-6 bg-white/[0.02]" id="experience">
+            <div class="max-w-[800px] mx-auto">
+                <div class="text-center mb-20 space-y-4">
+                    <h3 class="text-primary font-bold tracking-widest uppercase text-sm">Deneyim</h3>
+                    <h2 class="text-4xl font-bold">Work Experience</h2>
+                </div>
+                <div class="relative space-y-12">
+                    <div class="absolute left-0 md:left-1/2 md:-ml-px h-full w-0.5 bg-gradient-to-b from-primary via-primary/20 to-transparent"></div>
+                    <div class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center w-full">
+                        <div class="md:w-[45%] mb-4 md:mb-0 md:text-right order-2 md:order-1">
+                            <h4 class="text-xl font-bold">Senior Software Engineer</h4>
+                            <p class="text-primary text-sm font-bold mt-1">TechVision Global</p>
+                            <p class="text-slate-400 mt-2 text-sm leading-relaxed">Led the architectural redesign of core SaaS products, improving system throughput by 40% using microservices.</p>
+                        </div>
+                        <div class="absolute left-[-8px] md:left-1/2 md:-ml-[9px] z-10 size-4 rounded-full bg-primary glow-green border-4 border-background-dark order-1 md:order-2"></div>
+                        <div class="md:w-[45%] md:pl-8 order-3">
+                            <span class="px-3 py-1 rounded bg-white/5 text-xs font-mono text-slate-400 border border-white/10">2021 — PRESENT</span>
+                        </div>
+                    </div>
+                    <div class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center w-full">
+                        <div class="md:w-[45%] order-3 md:order-1 text-right hidden md:block">
+                            <span class="px-3 py-1 rounded bg-white/5 text-xs font-mono text-slate-400 border border-white/10">2018 — 2021</span>
+                        </div>
+                        <div class="absolute left-[-8px] md:left-1/2 md:-ml-[9px] z-10 size-4 rounded-full bg-primary border-4 border-background-dark order-1 md:order-2"></div>
+                        <div class="md:w-[45%] md:pl-8 order-2 md:order-3">
+                            <h4 class="text-xl font-bold">Full Stack Developer</h4>
+                            <p class="text-primary text-sm font-bold mt-1">Creative Matrix Studio</p>
+                            <p class="text-slate-400 mt-2 text-sm leading-relaxed">Built and deployed over 15+ high-traffic mobile and web applications with focus on interactive UI components.</p>
+                            <span class="md:hidden inline-block mt-2 px-3 py-1 rounded bg-white/5 text-xs font-mono text-slate-400 border border-white/10">2018 — 2021</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-6" id="portfolio">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="flex justify-between items-center mb-16">
+                    <h2 class="text-4xl font-bold">Projelerim</h2>
+                    <a class="text-primary font-bold flex items-center gap-2 hover:underline" href="#">
+                        View All <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="group relative overflow-hidden rounded-2xl border border-white/5 bg-surface-dark transition-all hover:-translate-y-2">
+                        <div class="aspect-[16/10] overflow-hidden">
+                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJfj6p8VbYpQhQsg4uFm7Y4AuBOrf9oSjIOb2dn6jc0fGYorlTVUHCI8_sW_iFvmWVTh8hGqvA4CP3e5Yxvzx8AG7GWvxrOifqbwN4_qORYmNQPJ62R3jVbSkM6YbZi2mPlkrR1fYXvf_PtIn6Ubfua0cAGYCb8fvJJCa2axv-4XstOrs7S77xeJd6NrnZZxcjI6euRZen8omBAIz3DSI3D4YtlfmZ10tvKLb4hmJi0Rl7P-JR7EyOpQ7rFmPeCacwLLyYhUFazvM" />
+                        </div>
+                        <div class="p-6">
+                            <div class="flex gap-2 mb-4">
+                                <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">React</span>
+                                <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">D3.js</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Quantum Analytics Hub</h3>
+                            <p class="text-sm text-slate-400 line-clamp-2">Real-time cryptocurrency tracking platform with advanced predictive modeling visualizations.</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden rounded-2xl border border-white/5 bg-surface-dark transition-all hover:-translate-y-2">
+                        <div class="aspect-[16/10] overflow-hidden">
+                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9LRsEOUX3QWnSmj-sLDEHkAAPN9pjUUIOtUsVpJSPfcz_bTHtbRX2_n6gTSIHM9yhoHXpx1l1yLSgNJeKJTeM3_1x_SsGxlcEIVZq7QVzqprS6XPndOsz5s9EFJzflpj7ONdFz_uaKXdo5ePb3yvhPlllkm7xC5D5iCwJ-_m3vNS8T86VNfB74fy3C4-LLITC1AjcLOekDoPm_c7OcKvC4O4MzSwX6P79WjRk6oZk5JZRzMv3ILPWJhKcOltN_lWSAK_soymJgJ8" />
+                        </div>
+                        <div class="p-6">
+                            <div class="flex gap-2 mb-4">
+                                <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">Flutter</span>
+                                <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">Firebase</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">NeoBank Mobile App</h3>
+                            <p class="text-sm text-slate-400 line-clamp-2">A sleek, futuristic fintech solution focused on seamless cross-border transactions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-6 text-center bg-gradient-to-b from-transparent to-primary/5">
+            <div class="max-w-[800px] mx-auto space-y-8">
+                <h2 class="text-4xl md:text-6xl font-black">Let's build something <br /> <span class="text-primary italic">extraordinary</span>.</h2>
+                <p class="text-slate-400 text-lg">Currently accepting freelance projects and architectural consulting roles.</p>
+                <div class="flex justify-center">
+                    <button class="px-10 py-5 green-gradient-btn text-background-dark rounded-full font-black text-xl glow-green hover:scale-105 transition-transform">
+                        İletişime Geç
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-surface-dark border-t border-white/5 py-12 px-6">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-2 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="size-6 bg-primary rounded flex items-center justify-center text-background-dark">
+                            <span class="material-symbols-outlined text-xs font-bold">terminal</span>
+                        </div>
+                        <h2 class="text-lg font-800 tracking-tighter uppercase">Yusuf Topal</h2>
+                    </div>
+                    <p class="text-slate-400 max-w-sm leading-relaxed">
+                        Architecting the future of the web with precision code and visionary design. Based in Istanbul, working globally.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 uppercase text-xs tracking-widest text-primary">Bağlantılar</h4>
+                    <ul class="space-y-4 text-sm text-slate-400">
+                        <li><a class="hover:text-white transition-colors" href="#">Ana Sayfa</a></li>
+                        <li><a class="hover:text-white transition-colors" href="#about">Hakkımda</a></li>
+                        <li><a class="hover:text-white transition-colors" href="#portfolio">Projelerim</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 uppercase text-xs tracking-widest text-primary">Sosyal Medya</h4>
+                    <div class="flex gap-4">
+                        <a class="size-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all" href="#">
+                            <span class="material-symbols-outlined">link</span>
+                        </a>
+                        <a class="size-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all" href="#">
+                            <span class="material-symbols-outlined">groups</span>
+                        </a>
+                        <a class="size-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all" href="#">
+                            <span class="material-symbols-outlined">alternate_email</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-xs text-slate-500 font-mono">© 2024 YUSUF TOPAL. ALL RIGHTS RESERVED.</p>
+                <div class="flex items-center gap-4 text-xs font-mono text-slate-500">
+                    <span>BUILT WITH PRECISION</span>
+                    <span class="text-primary">•</span>
+                    <span>DESIGNED FOR PERFORMANCE</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
